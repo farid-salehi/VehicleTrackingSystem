@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SevenPeaksSoftware.VehicleTracking.Infrastructure\SevenPeaksSoftware.VehicleTracking.Infrastructure.csproj" />
+    <ProjectReference Include="..\SevenPeaksSoftware.VehicleTracking.Ioc\SevenPeaksSoftware.VehicleTracking.Ioc.csproj" />
   </ItemGroup>
 
 </Project>
