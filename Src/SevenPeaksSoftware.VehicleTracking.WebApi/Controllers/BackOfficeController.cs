@@ -21,6 +21,31 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> LoginAsync
+            ([FromBody] InputLoginDto user, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _userService.LoginAsync(user, cancellationToken)).ResponseHandler();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshTokenAsync
+            ([FromBody] TokenDto token, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _userService.RefreshTokenAsync(token, cancellationToken)).ResponseHandler();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> AddUserAsync
             ([FromBody]InputAddUserDto user, CancellationToken cancellationToken)
         {
@@ -30,5 +55,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
             }
             return (await _userService.AddUserAsync(user, cancellationToken)).ResponseHandler();
         }
+
+        
     }
 }
