@@ -11,6 +11,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.AutoMapperConfigs
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<InputAddUserDto, UserModel>();
+                cfg.CreateMap<UserModel, OutputUserDto>();
 
             });
         }
