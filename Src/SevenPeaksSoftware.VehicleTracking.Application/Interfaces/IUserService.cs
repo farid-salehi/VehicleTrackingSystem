@@ -8,5 +8,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Interfaces
     public interface IUserService
     {
         Task<ResponseDto<OutputAddUserDto>> AddUserAsync(InputAddUserDto user, CancellationToken cancellationToken);
+        Task<ResponseDto<TokenDto>> LoginAsync(InputLoginDto user, CancellationToken cancellationToken);
+        Task<ResponseDto<TokenDto>> RefreshTokenAsync(TokenDto token, CancellationToken cancellationToken);
     }
 }
