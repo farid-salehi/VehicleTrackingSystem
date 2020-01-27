@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SevenPeaksSoftware.VehicleTracking.Application\SevenPeaksSoftware.VehicleTracking.Application.csproj" />
     <ProjectReference Include="..\SevenPeaksSoftware.VehicleTracking.Domain\SevenPeaksSoftware.VehicleTracking.Domain.csproj" />
     <ProjectReference Include="..\SevenPeaksSoftware.VehicleTracking.Infrastructure\SevenPeaksSoftware.VehicleTracking.Infrastructure.csproj" />
   </ItemGroup>
