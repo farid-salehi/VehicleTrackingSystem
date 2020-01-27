@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SevenPeaksSoftware.VehicleTracking.Application.Interfaces;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels.User;
+using SevenPeaksSoftware.VehicleTracking.Application.ViewModels.Vehicle;
 using SevenPeaksSoftware.VehicleTracking.WebApi.WebApiUtils;
 
 namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
@@ -15,11 +16,15 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
 
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
+        private readonly IVehicleService _vehicleService;
 
-        public BackOfficeController(IUserService userService, IRoleService roleService)
+        public BackOfficeController(IUserService userService
+            , IRoleService roleService
+            , IVehicleService vehicleService)
         {
             _userService = userService;
             _roleService = roleService;
+            _vehicleService = vehicleService;
         }
 
         [HttpPost]
@@ -70,6 +75,34 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
             return (await _roleService.GetRoleListAsync(cancellationToken)).ResponseHandler();
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterVehicleAsync
+            ([FromBody] InputVehicleDto vehicle, CancellationToken cancellationToken)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _vehicleService.RegisterVehicleAsync
+                (vehicle, cancellationToken)).ResponseHandler();
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> GetNewVehiclePasswordAsync
+            ([FromBody] InputVehicleDto vehicle, CancellationToken cancellationToken)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _vehicleService.GetVehicleNewPassword
+                (vehicle, cancellationToken)).ResponseHandler();
+        }
 
     }
 }

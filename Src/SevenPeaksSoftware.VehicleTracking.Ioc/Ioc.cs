@@ -25,6 +25,8 @@ namespace SevenPeaksSoftware.VehicleTracking.Ioc
 
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IRoleService, RoleService>();
 
 
 
