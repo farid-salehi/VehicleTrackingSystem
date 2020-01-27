@@ -5,8 +5,8 @@ namespace SevenPeaksSoftware.VehicleTracking.Domain.Enums
     {
         public enum UserRestrictionsEnum
         {
-            FirstNameMaxCharLength =50,
-            FirstNameMinCharLength = 3, 
+            FirstNameMaxCharLength = 50,
+            FirstNameMinCharLength = 3,
 
             LastNameMaxCharLength = 50,
             LastNameMinCharLength = 3,
@@ -15,7 +15,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Domain.Enums
             UsernameMinCharLength = 3,
 
             EmailMaxCharLength = 320,
-   
+
 
             MobileNumberMaxCharLength = 15,
 
