@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces;
 using SevenPeaksSoftware.VehicleTracking.Infrastructure;
+using SevenPeaksSoftware.VehicleTracking.Ioc;
 
 namespace SevenPeaksSoftware.VehicleTracking.WebApi
 {
@@ -20,6 +22,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddServices();
 
             services.AddDbContext<VehicleTrackingDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
@@ -40,7 +43,12 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var dbInitializer = serviceScope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                dbInitializer.Migrate();
+                dbInitializer.Seed();
+            }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
