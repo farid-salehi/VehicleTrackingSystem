@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{70BBF97E-AE38-4545-9717-38FC47245D0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{CA18E67B-F161-44D5-8997-D1D13864C123}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SevenPeaksSoftware.VehicleTracking.Application", "Src\SevenPeaksSoftware.VehicleTracking.Application\SevenPeaksSoftware.VehicleTracking.Application.csproj", "{F49FD49A-5015-4F03-81BF-72EB2ABF3A44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{03761623-B28E-4FF7-9BF7-470F80085A5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SevenPeaksSoftware.VehicleTracking.Infrastructure", "Src\SevenPeaksSoftware.VehicleTracking.Infrastructure\SevenPeaksSoftware.VehicleTracking.Infrastructure.csproj", "{C672433B-9DD2-45FB-9412-8244FD2B37E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{04D6E3B7-4041-4E5A-B0C2-F106866C69BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenPeaksSoftware.VehicleTracking.Domain", "Src\SevenPeaksSoftware.VehicleTracking.Domain\SevenPeaksSoftware.VehicleTracking.Domain.csproj", "{97F69951-9AAC-4318-AE94-73FD57B419E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ioc", "Ioc", "{33F10A59-7554-4A77-B368-7BFE7BC623A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenPeaksSoftware.VehicleTracking.Ioc", "Src\SevenPeaksSoftware.VehicleTracking.Ioc\SevenPeaksSoftware.VehicleTracking.Ioc.csproj", "{4F271AF6-2B92-4F97-A57D-236EF01B6D84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{5FE96BF3-A642-4DF4-9CF4-01A592974F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenPeaksSoftware.VehicleTracking.WebApi", "Src\SevenPeaksSoftware.VehicleTracking.WebApi\SevenPeaksSoftware.VehicleTracking.WebApi.csproj", "{48CC17CB-6190-4553-B725-6C0C6BD0EF43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F49FD49A-5015-4F03-81BF-72EB2ABF3A44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49FD49A-5015-4F03-81BF-72EB2ABF3A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49FD49A-5015-4F03-81BF-72EB2ABF3A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49FD49A-5015-4F03-81BF-72EB2ABF3A44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C672433B-9DD2-45FB-9412-8244FD2B37E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C672433B-9DD2-45FB-9412-8244FD2B37E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C672433B-9DD2-45FB-9412-8244FD2B37E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C672433B-9DD2-45FB-9412-8244FD2B37E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F69951-9AAC-4318-AE94-73FD57B419E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F69951-9AAC-4318-AE94-73FD57B419E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F69951-9AAC-4318-AE94-73FD57B419E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F69951-9AAC-4318-AE94-73FD57B419E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F271AF6-2B92-4F97-A57D-236EF01B6D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F271AF6-2B92-4F97-A57D-236EF01B6D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F271AF6-2B92-4F97-A57D-236EF01B6D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F271AF6-2B92-4F97-A57D-236EF01B6D84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48CC17CB-6190-4553-B725-6C0C6BD0EF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48CC17CB-6190-4553-B725-6C0C6BD0EF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48CC17CB-6190-4553-B725-6C0C6BD0EF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48CC17CB-6190-4553-B725-6C0C6BD0EF43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA18E67B-F161-44D5-8997-D1D13864C123} = {70BBF97E-AE38-4545-9717-38FC47245D0F}
+		{F49FD49A-5015-4F03-81BF-72EB2ABF3A44} = {CA18E67B-F161-44D5-8997-D1D13864C123}
+		{03761623-B28E-4FF7-9BF7-470F80085A5E} = {70BBF97E-AE38-4545-9717-38FC47245D0F}
+		{C672433B-9DD2-45FB-9412-8244FD2B37E4} = {03761623-B28E-4FF7-9BF7-470F80085A5E}
+		{04D6E3B7-4041-4E5A-B0C2-F106866C69BE} = {70BBF97E-AE38-4545-9717-38FC47245D0F}
+		{97F69951-9AAC-4318-AE94-73FD57B419E2} = {04D6E3B7-4041-4E5A-B0C2-F106866C69BE}
+		{33F10A59-7554-4A77-B368-7BFE7BC623A3} = {70BBF97E-AE38-4545-9717-38FC47245D0F}
+		{4F271AF6-2B92-4F97-A57D-236EF01B6D84} = {33F10A59-7554-4A77-B368-7BFE7BC623A3}
+		{5FE96BF3-A642-4DF4-9CF4-01A592974F34} = {70BBF97E-AE38-4545-9717-38FC47245D0F}
+		{48CC17CB-6190-4553-B725-6C0C6BD0EF43} = {5FE96BF3-A642-4DF4-9CF4-01A592974F34}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF23B1D1-CD3A-4B92-9441-717F8ADE4452}
+	EndGlobalSection
+EndGlobal
