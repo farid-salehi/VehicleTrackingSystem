@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SevenPeaksSoftware.VehicleTracking.Application.Interfaces;
+using SevenPeaksSoftware.VehicleTracking.Application.ViewModels;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels.User;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels.Vehicle;
 using SevenPeaksSoftware.VehicleTracking.WebApi.WebApiUtils;
@@ -64,7 +65,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> GetRoleListAsync
             (CancellationToken cancellationToken)
         {
@@ -102,6 +103,18 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
             }
             return (await _vehicleService.GetVehicleNewPassword
                 (vehicle, cancellationToken)).ResponseHandler();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetVehicleListAsync
+            ([FromBody] LimitOffsetOrderByDto limitOffset, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _vehicleService.GetRegisteredVehicleListAsync
+                (limitOffset, cancellationToken)).ResponseHandler();
         }
 
     }

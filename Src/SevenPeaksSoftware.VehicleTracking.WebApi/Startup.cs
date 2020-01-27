@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using SevenPeaksSoftware.VehicleTracking.Application.AutoMapperConfigs;
 using SevenPeaksSoftware.VehicleTracking.Application.Settings;
 using SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces;
 using SevenPeaksSoftware.VehicleTracking.Infrastructure;
@@ -31,12 +32,16 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
         {
             services.AddServices();
 
+
             services.AddDbContext<VehicleTrackingDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.Configure<VehicleTrackingSettings>(options => Configuration.GetSection("VehicleTrackingSettings").Bind(options));
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSession();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
                 opt.TokenValidationParameters = new TokenValidationParameters
@@ -58,9 +63,12 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
                 };
             });
 
+
+            AutoMapperConfig.AddAutoMapperServices();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "7Software.VehicleTracking", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Aratel.CEM", Version = "v1" });
                 c.DescribeAllEnumsAsStrings();
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
@@ -86,17 +94,18 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
             }
             else
             {
-         
+                app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var dbInitializer = serviceScope.ServiceProvider.GetRequiredService<IDbInitializer>();
                 dbInitializer.Migrate();
                 dbInitializer.Seed();
             }
-            app.UseMvc();
+
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -106,7 +115,13 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-         
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,6 +22,26 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations
                 .Where(v => !v.IsDeleted
                             && v.VehicleRegistrationNumber.ToLower().Equals(vehicleRegistrationNumber.ToLower()))
                 .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<ICollection<VehicleModel>> GetVehicleList
+            (int limit, int offset, bool orderByDescending, CancellationToken cancellationToken)
+        {
+            if (orderByDescending)
+            {
+                return await DbContext.Vehicles
+                    .Where(v => !v.IsDeleted)
+                    .OrderByDescending(v => v.CreatedDateTime)
+                    .Skip(offset)
+                    .Take(limit)
+                    .ToListAsync(cancellationToken);
+            }
+            return await DbContext.Vehicles
+                .Where(v => !v.IsDeleted)
+                .OrderBy(v => v.CreatedDateTime)
+                .Skip(offset)
+                .Take(limit)
+                .ToListAsync(cancellationToken);
         }
 
     }

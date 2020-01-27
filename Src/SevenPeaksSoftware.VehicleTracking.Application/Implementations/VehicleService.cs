@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SevenPeaksSoftware.VehicleTracking.Application.ApplicationUtils;
@@ -92,6 +94,26 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
             });
         }
 
+        public async Task<ResponseDto<ICollection<VehicleDto>>> GetRegisteredVehicleListAsync
+            (LimitOffsetOrderByDto limitOffset, CancellationToken cancellationToken)
+        {
+            var result =
+                (await _unitOfWork.VehicleRepository.GetVehicleList
+                    (limitOffset.Limit, limitOffset.Offset, limitOffset.OrderByDescending, cancellationToken))
+                .Select(v =>
+                    new VehicleDto()
+                    {
+                        VehicleId = v.VehicleId,
+                        VehicleRegistrationNumber = v.VehicleRegistrationNumber
+                    }).ToList();
+
+            if (result.Count == 0)
+            {
+                return ResponseDto<ICollection<VehicleDto>>.UnsuccessfulResponse(
+                    ResponseEnums.ErrorEnum.NoContent, " ");
+            }
+            return ResponseDto<ICollection<VehicleDto>>.SuccessfulResponse(result);
+        }
 
     }
 }

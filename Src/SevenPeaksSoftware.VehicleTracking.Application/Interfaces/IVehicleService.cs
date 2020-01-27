@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels;
@@ -13,5 +14,8 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Interfaces
 
         Task<ResponseDto<OutputRegisterVehicleDto>> GetVehicleNewPassword(InputVehicleDto vehicle,
             CancellationToken cancellationToken);
+
+        Task<ResponseDto<ICollection<VehicleDto>>> GetRegisteredVehicleListAsync
+            (LimitOffsetOrderByDto limitOffset, CancellationToken cancellationToken);
     }
 }
