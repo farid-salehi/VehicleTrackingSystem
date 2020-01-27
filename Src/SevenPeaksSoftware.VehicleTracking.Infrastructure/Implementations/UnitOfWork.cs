@@ -8,10 +8,28 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations
     {
         private readonly VehicleTrackingDbContext _dbContext;
 
-        public UnitOfWork(VehicleTrackingDbContext dbContext)
+
+        public IUserRepository UserRepository { get; }
+        public IRoleRepository RoleRepository { get; }
+        public IUserRoleRepository UserRoleRepository { get; }
+        public IVehicleRepository VehicleRepository { get; }
+        public IVehicleTrackRepository VehicleTrackRepository { get; }
+
+        public UnitOfWork(VehicleTrackingDbContext dbContext,
+            IUserRepository userRepository,
+            IRoleRepository roleRepository, 
+            IUserRoleRepository userRoleRepository,
+            IVehicleRepository vehicleRepository, 
+            IVehicleTrackRepository vehicleTrackRepository)
         {
             _dbContext = dbContext;
+            UserRepository = userRepository;
+            RoleRepository = roleRepository;
+            UserRoleRepository = userRoleRepository;
+            VehicleRepository = vehicleRepository;
+            VehicleTrackRepository = vehicleTrackRepository;
         }
+
 
 
         public async Task<int> CommitAsync(CancellationToken cancellationToken)

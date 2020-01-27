@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using SevenPeaksSoftware.VehicleTracking.Application.Settings;
 using SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces;
 using SevenPeaksSoftware.VehicleTracking.Infrastructure;
 using SevenPeaksSoftware.VehicleTracking.Ioc;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace SevenPeaksSoftware.VehicleTracking.WebApi
 {
@@ -28,6 +35,46 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.Configure<VehicleTrackingSettings>(options => Configuration.GetSection("VehicleTrackingSettings").Bind(options));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidAudience = Configuration.GetSection("VehicleTrackingSettings")
+                        .GetSection("IdentitySettings").GetValue<string>("Audience"),
+
+                    ValidIssuer = Configuration.GetSection("VehicleTrackingSettings")
+                        .GetSection("IdentitySettings").GetValue<string>("Issuer"),
+
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration
+                        .GetSection("VehicleTrackingSettings").GetSection("IdentitySettings")
+                        .GetValue<string>("SecretKey")))
+                };
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "7Software.VehicleTracking", Version = "v1" });
+                c.DescribeAllEnumsAsStrings();
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer" +
+                                  " scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[] { } }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +86,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+         
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -49,16 +96,17 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
                 dbInitializer.Migrate();
                 dbInitializer.Seed();
             }
+            app.UseMvc();
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-            app.UseMvc(routes =>
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+         
         }
     }
 }
