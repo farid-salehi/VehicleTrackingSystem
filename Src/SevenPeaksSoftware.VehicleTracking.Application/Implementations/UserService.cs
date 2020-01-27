@@ -152,6 +152,23 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
             return ResponseDto<TokenDto>.SuccessfulResponse(newToken);
         }
 
+        public async Task<ResponseDto<ICollection<OutputUserDto>>> GetUserListAsync
+            (LimitOffsetOrderByDto limitOffset, CancellationToken cancellationToken)
+        {
+            var userList =
+                (await _unitOfWork.UserRepository.GetUserListAsync
+                    (limitOffset.Limit, limitOffset.Offset, limitOffset.OrderByDescending, cancellationToken));
+
+            var result = userList.Select(Mapper.Map<UserModel, OutputUserDto>).ToList();
+
+            if (result.Count == 0)
+            {
+                return ResponseDto<ICollection<OutputUserDto>>.UnsuccessfulResponse(
+                    ResponseEnums.ErrorEnum.NoContent, " ");
+            }
+            return ResponseDto<ICollection<OutputUserDto>>.SuccessfulResponse(result);
+        }
+
         private string GenerateJwt(UserModel user, IEnumerable<RoleModel> roleList)
         {
             var claimList = roleList.Select(x => new Claim(ClaimTypes.Role, x.RoleName)).ToList();

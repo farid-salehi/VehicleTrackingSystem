@@ -66,6 +66,17 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
 
 
         [HttpPost]
+        public async Task<IActionResult> GetUserListAsync
+            ([FromBody] LimitOffsetOrderByDto limitOffset, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _userService.GetUserListAsync(limitOffset, cancellationToken)).ResponseHandler();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> GetRoleListAsync
             (CancellationToken cancellationToken)
         {
