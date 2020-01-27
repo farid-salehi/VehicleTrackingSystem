@@ -14,10 +14,12 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
-        public BackOfficeController(IUserService userService)
+        public BackOfficeController(IUserService userService, IRoleService roleService)
         {
             _userService = userService;
+            _roleService = roleService;
         }
 
         [HttpPost]
@@ -56,6 +58,18 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
             return (await _userService.AddUserAsync(user, cancellationToken)).ResponseHandler();
         }
 
-        
+
+        [HttpGet]
+        public async Task<IActionResult> GetRoleListAsync
+            (CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _roleService.GetRoleListAsync(cancellationToken)).ResponseHandler();
+        }
+
+
     }
 }
