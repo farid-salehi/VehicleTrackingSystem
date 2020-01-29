@@ -1,9 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using Newtonsoft.Json;
 using SevenPeaksSoftware.VehicleTracking.Application.Enums;
 using SevenPeaksSoftware.VehicleTracking.Application.Interfaces;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels;
+using SevenPeaksSoftware.VehicleTracking.Application.ViewModels.LocationIq;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels.Track;
 using SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces;
 using SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces.InMemoryInterfaces;
@@ -16,12 +19,14 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
     {
         private readonly IInMemoryRepository _inMemoryRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILocationIqThirdPartyService _locationIqThirdPartyService;
 
         public VehicleTrackService( IInMemoryRepository inMemoryRepository,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork, ILocationIqThirdPartyService locationIqThirdPartyService)
         {
             _inMemoryRepository = inMemoryRepository;
             _unitOfWork = unitOfWork;
+            _locationIqThirdPartyService = locationIqThirdPartyService;
         }
 
 
@@ -110,6 +115,40 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
 
         }
 
+        public async Task<ResponseDto<OutputGetVehicleCurrentLocation>> GetVehicleCurrentLocationAsync
+            (InputGetVehicleCurrentLocation vehicle, CancellationToken cancellationToken)
+        {
 
+            var currentLocation =
+                await _inMemoryRepository.VehicleTrackInMemoryRepository
+                    .GetVehicleCurrentLocation(vehicle.VehicleRegisterNumber);
+            if (currentLocation == null)
+            {
+                return ResponseDto<OutputGetVehicleCurrentLocation>.UnsuccessfulResponse
+                    (ResponseEnums.ErrorEnum.NoContent);
+            }
+            var pointDetail = new OutputGetVehicleCurrentLocation()
+            {
+                Point = new Point()
+                {
+                    Latitude = currentLocation.Latitude,
+                    Longitudes = currentLocation.Longitudes
+                }
+            };
+            try
+            {
+                var locationDetail = await _locationIqThirdPartyService
+                    .ReverseGeoCodingAsync(currentLocation.Latitude,
+                        currentLocation.Longitudes, cancellationToken);
+
+                pointDetail.Detail =
+                    Mapper.Map<OutputReverseGeoCodingDto, PointDetailDto>(locationDetail);
+            }
+            catch (Exception)
+            {
+                //log
+            }
+            return ResponseDto<OutputGetVehicleCurrentLocation>.SuccessfulResponse(pointDetail);
+        }
     }
 }

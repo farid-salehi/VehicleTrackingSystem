@@ -38,6 +38,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Ioc
             services.AddScoped<IRedisConnectionFactory, RedisConnectFactory>();
             services.AddScoped<ITaskQueueInMemoryRepository, TaskQueueInMemoryRepository>();
             services.AddScoped<IVehicleTrackInMemoryRepository, VehicleTrackInMemoryRepository>();
+            services.AddScoped<ILocationIqThirdPartyService, LocationIqThirdPartyService>();
 
             services.AddHostedService<TaskExecutorService>();
 
