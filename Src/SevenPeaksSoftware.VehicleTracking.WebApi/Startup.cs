@@ -13,6 +13,7 @@ using SevenPeaksSoftware.VehicleTracking.Application.AutoMapperConfigs;
 using SevenPeaksSoftware.VehicleTracking.Application.Settings;
 using SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces;
 using SevenPeaksSoftware.VehicleTracking.Infrastructure;
+using SevenPeaksSoftware.VehicleTracking.Infrastructure.Settings;
 using SevenPeaksSoftware.VehicleTracking.Ioc;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -37,6 +38,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
             services.Configure<VehicleTrackingSettings>(options => Configuration.GetSection("VehicleTrackingSettings").Bind(options));
+            services.Configure<InfrastructureSettings>(options => Configuration.GetSection("InfrastructureSettings").Bind(options));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

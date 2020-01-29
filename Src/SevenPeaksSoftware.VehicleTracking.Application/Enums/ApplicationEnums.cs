@@ -6,7 +6,10 @@
         {
             Admin,
             GpsNavigator
-
+        }
+        public enum TaskQueueEnum
+        {
+            TrackVehicleQueue
         }
     }
 }
