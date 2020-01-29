@@ -104,7 +104,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> GetNewVehiclePasswordAsync
+        public async Task<IActionResult> GetVehicleNewPasswordAsync
             ([FromBody] InputVehicleDto vehicle, CancellationToken cancellationToken)
         {
 
