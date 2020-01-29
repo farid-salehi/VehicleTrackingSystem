@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using SevenPeaksSoftware.VehicleTracking.Application.BackgroundTaskManagers;
 using SevenPeaksSoftware.VehicleTracking.Application.Implementations;
 using SevenPeaksSoftware.VehicleTracking.Application.Interfaces;
 using SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces;
@@ -36,6 +37,9 @@ namespace SevenPeaksSoftware.VehicleTracking.Ioc
             services.AddScoped<IInMemoryRepository, InMemoryRepository>();
             services.AddScoped<IRedisConnectionFactory, RedisConnectFactory>();
             services.AddScoped<ITaskQueueInMemoryRepository, TaskQueueInMemoryRepository>();
+            services.AddScoped<IVehicleTrackInMemoryRepository, VehicleTrackInMemoryRepository>();
+
+            services.AddHostedService<TaskExecutorService>();
 
             return services;
         }

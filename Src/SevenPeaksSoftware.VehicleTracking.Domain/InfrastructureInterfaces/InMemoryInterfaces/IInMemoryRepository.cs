@@ -3,5 +3,6 @@
     public interface IInMemoryRepository
     {
         ITaskQueueInMemoryRepository  TaskQueueInMemoryRepository  { get; }
+        IVehicleTrackInMemoryRepository VehicleTrackInMemoryRepository { get; }
     }
 }

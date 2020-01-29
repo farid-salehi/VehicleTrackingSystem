@@ -12,6 +12,8 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Interfaces
         (InputTrackDto track, string vehicleRegistrationNumber,
             CancellationToken cancellationToken);
 
+        Task TrackAsync(CancellationToken cancellationToken);
+
 
     }
 }
