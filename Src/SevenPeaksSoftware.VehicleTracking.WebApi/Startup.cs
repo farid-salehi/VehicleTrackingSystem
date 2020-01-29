@@ -68,7 +68,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Aratel.CEM", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "7PeaksSoftware.VehicleTracking", Version = "v1" });
                 c.DescribeAllEnumsAsStrings();
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
