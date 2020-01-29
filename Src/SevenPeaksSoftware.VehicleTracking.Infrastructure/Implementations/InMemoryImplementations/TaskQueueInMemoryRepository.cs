@@ -17,9 +17,24 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations.InMe
 
         public async Task<bool> QueueTaskAsync(string queueName, string objectString)
         {
-           await _db.ListLeftPushAsync
-                (queueName, new RedisValue[] {objectString}, CommandFlags.FireAndForget);
+            await _db.ListLeftPushAsync
+                (queueName, new RedisValue[] { objectString }, CommandFlags.FireAndForget);
             return true;
+        }
+
+        public async Task<string> DeQueueTaskAsync(string queueName)
+        {
+
+            var j = await _db.ListRightPopAsync(queueName);
+            return j;
+        }
+
+
+        public async Task<long> TaskCount(string queueName)
+        {
+            var j = await _db.ListLengthAsync(queueName);
+            var z = await _db.ListLengthAsync(queueName);
+            return z;
         }
     }
 }

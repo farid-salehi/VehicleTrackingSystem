@@ -5,12 +5,14 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations.InMe
     public class InMemoryRepository : IInMemoryRepository
     {
         public ITaskQueueInMemoryRepository TaskQueueInMemoryRepository { get; }
+        public IVehicleTrackInMemoryRepository VehicleTrackInMemoryRepository { get; }
 
 
-
-        public InMemoryRepository( ITaskQueueInMemoryRepository taskQueueInMemoryRepository)
+        public InMemoryRepository( ITaskQueueInMemoryRepository taskQueueInMemoryRepository
+            , IVehicleTrackInMemoryRepository vehicleTrackInMemoryRepository)
         {
             TaskQueueInMemoryRepository = taskQueueInMemoryRepository;
+            VehicleTrackInMemoryRepository = vehicleTrackInMemoryRepository;
         }
 
     }
