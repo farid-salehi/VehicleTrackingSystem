@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels;
 using SevenPeaksSoftware.VehicleTracking.Application.ViewModels.Track;
@@ -16,6 +17,10 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Interfaces
 
         Task<ResponseDto<OutputGetVehicleCurrentLocation>> GetVehicleCurrentLocationAsync
             (InputGetVehicleCurrentLocation vehicle, CancellationToken cancellationToken);
+
+
+        Task<ResponseDto<ICollection<PointDateTimeDto>>> GetVehicleRouteAsync
+            (InputGetVehicleRouteDto vehicle, CancellationToken cancellationToken);
 
 
     }

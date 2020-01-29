@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -105,7 +107,10 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
             {
                 Latitude = track.Latitude,
                 Longitudes = track.Longitudes,
-                VehicleId = vehicle.VehicleId
+                VehicleId = vehicle.VehicleId,
+                //// use inserted data dateTime 
+                CreatedDateTime = vehicle.CreatedDateTime,
+                UpdatedDateTime = vehicle.CreatedDateTime
             };
 
             await _unitOfWork.VehicleTrackRepository.AddAsync
@@ -149,6 +154,30 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
                 //log
             }
             return ResponseDto<OutputGetVehicleCurrentLocation>.SuccessfulResponse(pointDetail);
+        }
+
+        public async Task<ResponseDto<ICollection<PointDateTimeDto>>> GetVehicleRouteAsync
+            (InputGetVehicleRouteDto vehicle, CancellationToken cancellationToken)
+
+        {
+            var route =
+                (await _unitOfWork.VehicleTrackRepository.GetVehicleRoteAsync
+                (vehicle.VehicleRegisterNumber, vehicle.StartDateTimeOffset,
+                    vehicle.EndDateTimeOffset, cancellationToken))
+                .Select(r => new PointDateTimeDto()
+                {
+                    Latitude = r.Latitude,
+                    Longitudes = r.Longitudes,
+                    DateTimeOffset = r.CreatedDateTime
+                }).ToList();
+
+            if (route.Count == 0)
+            {
+                return ResponseDto<ICollection<PointDateTimeDto>>.UnsuccessfulResponse
+                    (ResponseEnums.ErrorEnum.NoContent);
+            }
+
+            return ResponseDto<ICollection<PointDateTimeDto>>.SuccessfulResponse(route);
         }
     }
 }
