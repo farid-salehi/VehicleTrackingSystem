@@ -144,5 +144,17 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
             return (await _vehicleTrackService.GetVehicleCurrentLocationAsync
                 (vehicle, cancellationToken)).ResponseHandler();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetVehicleRouteAsync
+            ([FromBody] InputGetVehicleRouteDto vehicle, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return (ModelState.BadRequestErrorHandler()).ResponseHandler();
+            }
+            return (await _vehicleTrackService.GetVehicleRouteAsync
+                (vehicle, cancellationToken)).ResponseHandler();
+        }
     }
 }
