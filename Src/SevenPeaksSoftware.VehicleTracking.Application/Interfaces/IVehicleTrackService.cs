@@ -14,6 +14,9 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Interfaces
 
         Task TrackAsync(CancellationToken cancellationToken);
 
+        Task<ResponseDto<OutputGetVehicleCurrentLocation>> GetVehicleCurrentLocationAsync
+            (InputGetVehicleCurrentLocation vehicle, CancellationToken cancellationToken);
+
 
     }
 }
