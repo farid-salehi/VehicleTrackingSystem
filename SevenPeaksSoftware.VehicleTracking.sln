@@ -15,15 +15,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SevenPeaksSoftware.VehicleT
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{04D6E3B7-4041-4E5A-B0C2-F106866C69BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenPeaksSoftware.VehicleTracking.Domain", "Src\SevenPeaksSoftware.VehicleTracking.Domain\SevenPeaksSoftware.VehicleTracking.Domain.csproj", "{97F69951-9AAC-4318-AE94-73FD57B419E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SevenPeaksSoftware.VehicleTracking.Domain", "Src\SevenPeaksSoftware.VehicleTracking.Domain\SevenPeaksSoftware.VehicleTracking.Domain.csproj", "{97F69951-9AAC-4318-AE94-73FD57B419E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ioc", "Ioc", "{33F10A59-7554-4A77-B368-7BFE7BC623A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenPeaksSoftware.VehicleTracking.Ioc", "Src\SevenPeaksSoftware.VehicleTracking.Ioc\SevenPeaksSoftware.VehicleTracking.Ioc.csproj", "{4F271AF6-2B92-4F97-A57D-236EF01B6D84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SevenPeaksSoftware.VehicleTracking.Ioc", "Src\SevenPeaksSoftware.VehicleTracking.Ioc\SevenPeaksSoftware.VehicleTracking.Ioc.csproj", "{4F271AF6-2B92-4F97-A57D-236EF01B6D84}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{5FE96BF3-A642-4DF4-9CF4-01A592974F34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenPeaksSoftware.VehicleTracking.WebApi", "Src\SevenPeaksSoftware.VehicleTracking.WebApi\SevenPeaksSoftware.VehicleTracking.WebApi.csproj", "{48CC17CB-6190-4553-B725-6C0C6BD0EF43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SevenPeaksSoftware.VehicleTracking.WebApi", "Src\SevenPeaksSoftware.VehicleTracking.WebApi\SevenPeaksSoftware.VehicleTracking.WebApi.csproj", "{48CC17CB-6190-4553-B725-6C0C6BD0EF43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5AE3B9A3-6A09-4B1A-A9B3-F057ACE9A9F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Test\UnitTest\UnitTests.csproj", "{99AE0F4B-1046-49F9-AF2D-66BD94821392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{48CC17CB-6190-4553-B725-6C0C6BD0EF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48CC17CB-6190-4553-B725-6C0C6BD0EF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48CC17CB-6190-4553-B725-6C0C6BD0EF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99AE0F4B-1046-49F9-AF2D-66BD94821392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99AE0F4B-1046-49F9-AF2D-66BD94821392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99AE0F4B-1046-49F9-AF2D-66BD94821392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99AE0F4B-1046-49F9-AF2D-66BD94821392}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 		{4F271AF6-2B92-4F97-A57D-236EF01B6D84} = {33F10A59-7554-4A77-B368-7BFE7BC623A3}
 		{5FE96BF3-A642-4DF4-9CF4-01A592974F34} = {70BBF97E-AE38-4545-9717-38FC47245D0F}
 		{48CC17CB-6190-4553-B725-6C0C6BD0EF43} = {5FE96BF3-A642-4DF4-9CF4-01A592974F34}
+		{99AE0F4B-1046-49F9-AF2D-66BD94821392} = {5AE3B9A3-6A09-4B1A-A9B3-F057ACE9A9F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF23B1D1-CD3A-4B92-9441-717F8ADE4452}
