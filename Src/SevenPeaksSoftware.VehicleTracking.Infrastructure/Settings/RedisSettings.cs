@@ -2,6 +2,6 @@
 {
     public class RedisSettings
     {
-        public string ConnectionSting { get; set; }
+        public string RedisConnection { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.ViewModels.Track
     {
         public double Latitude { get; set; }
         public double Longitudes { get; set; }
-        public DateTimeOffset DateTimeOffset { get; set; }
+        public string DateTimeOffset { get; set; }
     }
 }

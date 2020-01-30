@@ -80,7 +80,7 @@ namespace SevenPeaksSoftware.VehicleTracking.WebApi.Controllers
             return (await _userService.GetUserListAsync(limitOffset, cancellationToken)).ResponseHandler();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> GetRoleListAsync
             (CancellationToken cancellationToken)
         {

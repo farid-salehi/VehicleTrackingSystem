@@ -18,7 +18,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations
 
 
         public async Task<ICollection<VehicleTrackModel>> GetVehicleRoteAsync
-            (string vehicleRegisterNumber, DateTimeOffset startDateTimeOffset,
+            (string VehicleRegistrationNumber, DateTimeOffset startDateTimeOffset,
                 DateTimeOffset endDateTimeOffset, CancellationToken cancellationToken)
         {
             //try to get route by time
@@ -26,7 +26,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations
                 .Include(t => t.VehicleInfo)
                 .Where(t => !t.IsDeleted
                             && t.VehicleInfo.VehicleRegistrationNumber.ToLower()
-                                .Equals(vehicleRegisterNumber)
+                                .Equals(VehicleRegistrationNumber)
                             && t.CreatedDateTime >= startDateTimeOffset
                             && t.CreatedDateTime <= endDateTimeOffset)
                 .OrderByDescending(t => t.CreatedDateTime)
@@ -43,15 +43,18 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations
                 .Include(t => t.VehicleInfo)
                 .Where(t => !t.IsDeleted
                             && t.VehicleInfo.VehicleRegistrationNumber.ToLower()
-                                .Equals(vehicleRegisterNumber)
+                                .Equals(VehicleRegistrationNumber)
                             && t.CreatedDateTime < startDateTimeOffset)
                 .OrderByDescending(t => t.CreatedDateTime)
                 .FirstOrDefaultAsync(cancellationToken));
-             lastLocation.CreatedDateTime = endDateTimeOffset;
+           
+             if (lastLocation != null)
+             {
+                 lastLocation.CreatedDateTime = endDateTimeOffset;
+                 route.Add(lastLocation);
+             }
 
-            route.Add(lastLocation);
-
-            return route;
+             return route;
 
         }
     }
