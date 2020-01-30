@@ -60,7 +60,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
 
             return ResponseDto<OutputRegisterVehicleDto>.SuccessfulResponse(new OutputRegisterVehicleDto()
             {
-                  VehicleRegisterNumber = newVehicle.VehicleRegistrationNumber,
+                VehicleRegistrationNumber = newVehicle.VehicleRegistrationNumber,
                   Password = password
             });
         }
@@ -97,7 +97,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
 
             return ResponseDto<OutputRegisterVehicleDto>.SuccessfulResponse(new OutputRegisterVehicleDto()
             {
-                VehicleRegisterNumber = newVehicle.VehicleRegistrationNumber,
+                VehicleRegistrationNumber = newVehicle.VehicleRegistrationNumber,
                 Password = password
             });
         }
@@ -107,7 +107,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
         {
             var result =
                 (await _unitOfWork.VehicleRepository.GetVehicleList
-                    (limitOffset.Limit, limitOffset.Offset, limitOffset.OrderByDescending, cancellationToken))
+                    (limitOffset.Limit, limitOffset.Offset, limitOffset.OrderByCreatedTimeDescending, cancellationToken))
                 .Select(v =>
                     new VehicleDto()
                     {

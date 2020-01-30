@@ -157,7 +157,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
         {
             var userList =
                 (await _unitOfWork.UserRepository.GetUserListAsync
-                    (limitOffset.Limit, limitOffset.Offset, limitOffset.OrderByDescending, cancellationToken));
+                    (limitOffset.Limit, limitOffset.Offset, limitOffset.OrderByCreatedTimeDescending, cancellationToken));
 
             var result = userList.Select(Mapper.Map<UserModel, OutputUserDto>).ToList();
 

@@ -31,12 +31,12 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.ViewModels.User
        public string CountryCode { get; set; } = "+66";
 
 
-        [MaxLength((int)ModelRestrictionsEnum.UserRestrictionsEnum.MobileNumberMaxCharLength)]
-        public string MobileNumber { get; set; }
+       [MaxLength((int) ModelRestrictionsEnum.UserRestrictionsEnum.MobileNumberMaxCharLength)]
+       public string MobileNumber { get; set; } = "";
 
 
-        [MaxLength((int)ModelRestrictionsEnum.UserRestrictionsEnum.EmailMaxCharLength)]
-        public string Email { get; set; }
+       [MaxLength((int) ModelRestrictionsEnum.UserRestrictionsEnum.EmailMaxCharLength)]
+       public string Email { get; set; } = "";
 
 
         [Required]

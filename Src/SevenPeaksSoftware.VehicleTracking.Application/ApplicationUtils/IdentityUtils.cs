@@ -67,7 +67,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.ApplicationUtils
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var principal = tokenHandler.ValidateToken(token,
                     tokenValidationParameters, out var securityToken);
-                var jwtSecurityToken = securityToken as JwtSecurityToken;
+                var jwtSecurityToken = (JwtSecurityToken) securityToken;
                 if (jwtSecurityToken == null || !jwtSecurityToken.Header.
                         Alg.Equals(SecurityAlgorithms.HmacSha256Signature,
                             StringComparison.InvariantCultureIgnoreCase))

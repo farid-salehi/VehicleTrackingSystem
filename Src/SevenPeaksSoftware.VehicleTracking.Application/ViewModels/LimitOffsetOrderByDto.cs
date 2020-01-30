@@ -7,7 +7,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.ViewModels
 {
     public class LimitOffsetOrderByDto
     {
-        public bool OrderByDescending { get; set; } = true;
+        public bool OrderByCreatedTimeDescending { get; set; } = true;
 
         [Range(1, 30)]
         public int Limit { get; set; } = 10;

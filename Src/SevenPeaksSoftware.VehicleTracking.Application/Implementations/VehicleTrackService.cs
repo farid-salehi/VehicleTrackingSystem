@@ -126,7 +126,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
 
             var currentLocation =
                 await _inMemoryRepository.VehicleTrackInMemoryRepository
-                    .GetVehicleCurrentLocation(vehicle.VehicleRegisterNumber);
+                    .GetVehicleCurrentLocation(vehicle.VehicleRegistrationNumber);
             if (currentLocation == null)
             {
                 return ResponseDto<OutputGetVehicleCurrentLocation>.UnsuccessfulResponse
@@ -162,13 +162,13 @@ namespace SevenPeaksSoftware.VehicleTracking.Application.Implementations
         {
             var route =
                 (await _unitOfWork.VehicleTrackRepository.GetVehicleRoteAsync
-                (vehicle.VehicleRegisterNumber, vehicle.StartDateTimeOffset,
+                (vehicle.VehicleRegistrationNumber, vehicle.StartDateTimeOffset,
                     vehicle.EndDateTimeOffset, cancellationToken))
                 .Select(r => new PointDateTimeDto()
                 {
                     Latitude = r.Latitude,
                     Longitudes = r.Longitudes,
-                    DateTimeOffset = r.CreatedDateTime
+                    DateTimeOffset = r.CreatedDateTime.ToString("f")
                 }).ToList();
 
             if (route.Count == 0)

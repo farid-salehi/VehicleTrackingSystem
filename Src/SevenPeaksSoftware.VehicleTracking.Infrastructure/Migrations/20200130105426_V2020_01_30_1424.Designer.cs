@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SevenPeaksSoftware.VehicleTracking.Infrastructure;
 
 namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Migrations
 {
     [DbContext(typeof(VehicleTrackingDbContext))]
-    partial class VehicleTrackingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200130105426_V2020_01_30_1424")]
+    partial class V2020_01_30_1424
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

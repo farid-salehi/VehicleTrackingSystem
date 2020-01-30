@@ -86,9 +86,17 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure
                     .EmailMaxCharLength);
 
             modelBuilder.Entity<UserModel>()
+                .Property(p => p.Email)
+                .HasDefaultValue("");
+
+            modelBuilder.Entity<UserModel>()
                 .Property(p => p.MobileNumber).
                 HasMaxLength((int)ModelRestrictionsEnum.UserRestrictionsEnum
                     .MobileNumberMaxCharLength);
+
+            modelBuilder.Entity<UserModel>()
+                .Property(p => p.Email)
+                .HasDefaultValue("");
 
             modelBuilder.Entity<UserModel>()
                 .HasMany(e => e.UserRoleList)
@@ -96,6 +104,15 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure
                 .HasForeignKey(k => k.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<UserModel>()
+                .HasIndex(i => new {i.Username, i.IsDeleted})
+                .IsUnique(false);
+
+            modelBuilder.Entity<UserModel>()
+                .HasIndex(i => new { i.CreatedDateTime, i.IsDeleted })
+                .IsUnique(true);
 
             #endregion
 
@@ -141,6 +158,10 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure
 
             modelBuilder.Entity<UserRoleModel>()
                 .Property(p => p.UserRoleId).UseSqlServerIdentityColumn();
+
+            modelBuilder.Entity<UserModel>()
+                .HasIndex(i => new { i.UserId, i.IsDeleted })
+                .IsUnique(false);
 
 
 
@@ -190,6 +211,14 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure
                 HasMaxLength((int)ModelRestrictionsEnum.UserRestrictionsEnum
                     .RefreshTokenMaxCharLength);
 
+            modelBuilder.Entity<VehicleModel>()
+                .HasIndex(i => new { i.VehicleRegistrationNumber, i.IsDeleted })
+                .IsUnique(false);
+
+            modelBuilder.Entity<VehicleModel>()
+                .HasIndex(i => new { i.CreatedDateTime, i.IsDeleted })
+                .IsUnique(true);
+
 
 
             #endregion
@@ -203,6 +232,10 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure
 
             modelBuilder.Entity<VehicleTrackModel>()
                 .Property(p => p.VehicleTrackId).UseSqlServerIdentityColumn();
+
+            modelBuilder.Entity<VehicleModel>()
+                .HasIndex(i => new { i.CreatedDateTime})
+                .IsUnique(false);
 
 
             #endregion

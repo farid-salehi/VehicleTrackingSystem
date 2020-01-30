@@ -14,7 +14,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Infrastructure.Implementations.InMe
         {
             _settings = settings.Value;
             _connection = 
-                ConnectionMultiplexer.Connect(_settings.RedisSettings.ConnectionSting);
+                ConnectionMultiplexer.Connect(_settings.RedisSettings.RedisConnection);
 
             
         }

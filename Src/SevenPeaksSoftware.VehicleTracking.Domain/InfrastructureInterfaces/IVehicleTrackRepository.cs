@@ -11,7 +11,7 @@ namespace SevenPeaksSoftware.VehicleTracking.Domain.InfrastructureInterfaces
     public interface IVehicleTrackRepository : IRepository<VehicleTrackModel>
     {
         Task<ICollection<VehicleTrackModel>> GetVehicleRoteAsync
-        (string vehicleRegisterNumber, DateTimeOffset startDateTimeOffset,
+        (string vehicleRegistrationNumber, DateTimeOffset startDateTimeOffset,
             DateTimeOffset endDateTimeOffset, CancellationToken cancellationToken);
     }
 }
